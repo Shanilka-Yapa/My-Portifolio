@@ -6,502 +6,1130 @@
     <title>Shanilka T. Yapa | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
     <style>
-      body {
-        font-family: "Inter", sans-serif;
+      :root {
+        color-scheme: dark;
+      }
+
+      html {
         scroll-behavior: smooth;
       }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(56, 189, 248, 0.14),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at top right,
+            rgba(168, 85, 247, 0.12),
+            transparent 24%
+          ),
+          linear-gradient(180deg, #050816 0%, #08111f 55%, #050816 100%);
+        color: #e2e8f0;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.85),
+          transparent 92%
+        );
+        opacity: 0.35;
+      }
+
+      .brand-font {
+        font-family: "Space Grotesk", sans-serif;
+      }
+
       .gradient-text {
-        background: linear-gradient(to right, #60a5fa, #a855f7);
+        background: linear-gradient(90deg, #7dd3fc, #a78bfa, #f472b6);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+
+      .glass-panel {
+        background: rgba(15, 23, 42, 0.72);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        box-shadow: 0 30px 100px rgba(2, 6, 23, 0.35);
+      }
+
+      .nav-link {
+        position: relative;
+        color: #94a3b8;
+        transition: color 180ms ease;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: #f8fafc;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.35rem;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #38bdf8, #a855f7);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 180ms ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        transform: scaleX(1);
+      }
+
+      .hero-orb {
+        position: absolute;
+        inset: auto;
+        border-radius: 999px;
+        filter: blur(24px);
+        opacity: 0.35;
+        animation: float 10s ease-in-out infinite;
+      }
+
+      .hero-orb.one {
+        width: 12rem;
+        height: 12rem;
+        background: rgba(56, 189, 248, 0.32);
+        top: 6%;
+        right: 8%;
+      }
+
+      .hero-orb.two {
+        width: 9rem;
+        height: 9rem;
+        background: rgba(168, 85, 247, 0.25);
+        bottom: 10%;
+        left: 6%;
+        animation-delay: -3s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-14px);
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 700ms ease,
+          transform 700ms ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .stat-card,
+      .work-card,
+      .skill-card,
+      .contact-card {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(148, 163, 184, 0.15);
+        box-shadow: 0 18px 50px rgba(2, 6, 23, 0.22);
+      }
+
+      .stat-card {
+        border-radius: 1.25rem;
+        padding: 1rem;
+      }
+
+      .work-card {
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          background 180ms ease;
+      }
+
+      .work-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(56, 189, 248, 0.38);
+        background: rgba(15, 23, 42, 0.85);
+      }
+
+      .work-kicker {
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #7dd3fc;
+      }
+
+      .work-title {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.2rem;
+        line-height: 1.35;
+        color: #f8fafc;
+        font-weight: 700;
+      }
+
+      .work-copy {
+        color: #94a3b8;
+        line-height: 1.7;
+        font-size: 0.95rem;
+      }
+
+      .tag-pill,
+      .filter-pill,
+      .skill-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        padding: 0.45rem 0.8rem;
+        font-size: 0.82rem;
+        color: #bfdbfe;
+        background: rgba(15, 23, 42, 0.56);
+      }
+
+      .filter-pill {
+        color: #cbd5e1;
+        cursor: pointer;
+        transition:
+          color 180ms ease,
+          border-color 180ms ease,
+          background 180ms ease;
+      }
+
+      .filter-pill:hover,
+      .filter-pill.active {
+        color: #ffffff;
+        border-color: rgba(56, 189, 248, 0.52);
+        background: rgba(56, 189, 248, 0.14);
+      }
+
+      .work-meta,
+      .skill-meta,
+      .contact-meta {
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #7dd3fc;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        border-radius: 999px;
+        padding: 0.45rem 0.75rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        border: 1px solid transparent;
+      }
+
+      .status-ongoing {
+        color: #7dd3fc;
+        background: rgba(14, 165, 233, 0.12);
+        border-color: rgba(14, 165, 233, 0.22);
+      }
+
+      .status-completed {
+        color: #86efac;
+        background: rgba(34, 197, 94, 0.12);
+        border-color: rgba(34, 197, 94, 0.22);
+      }
+
+      .status-design {
+        color: #f9a8d4;
+        background: rgba(236, 72, 153, 0.12);
+        border-color: rgba(236, 72, 153, 0.22);
+      }
+
+      .status-build {
+        color: #c4b5fd;
+        background: rgba(168, 85, 247, 0.12);
+        border-color: rgba(168, 85, 247, 0.22);
+      }
+
+      .action-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #cbd5e1;
+        transition: color 180ms ease;
+      }
+
+      .action-link:hover {
+        color: #7dd3fc;
+      }
+
+      .work-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+      }
+
+      .ghost-button,
+      .primary-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        border-radius: 999px;
+        padding: 0.85rem 1.2rem;
+        font-weight: 700;
+        transition:
+          transform 180ms ease,
+          background 180ms ease,
+          border-color 180ms ease,
+          color 180ms ease;
+      }
+
+      .primary-button {
+        color: #04111f;
+        background: linear-gradient(90deg, #7dd3fc, #a78bfa);
+      }
+
+      .primary-button:hover,
+      .ghost-button:hover {
+        transform: translateY(-1px);
+      }
+
+      .ghost-button {
+        color: #e2e8f0;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        background: rgba(15, 23, 42, 0.65);
+      }
+
+      .skill-card {
+        border-radius: 1.25rem;
+        padding: 1.15rem;
+      }
+
+      .skill-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .skill-track {
+        height: 0.65rem;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.95);
+        border: 1px solid rgba(148, 163, 184, 0.12);
+      }
+
+      .skill-fill {
+        height: 100%;
+        width: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #38bdf8, #a855f7);
+        transition: width 800ms ease;
+      }
+
+      .skill-card.is-visible .skill-fill {
+        width: var(--skill-level, 0%);
+      }
+
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        display: grid;
+        place-items: center;
+        padding: 1.25rem;
+        background: rgba(2, 6, 23, 0.7);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms ease;
+      }
+
+      .modal-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-panel {
+        width: min(100%, 42rem);
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        background: rgba(7, 12, 25, 0.95);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        box-shadow: 0 30px 120px rgba(2, 6, 23, 0.58);
+      }
+
+      .search-input {
+        width: 100%;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.16);
+        background: rgba(15, 23, 42, 0.72);
+        padding: 0.95rem 1.1rem;
+        color: #f8fafc;
+        outline: none;
+      }
+
+      .search-input::placeholder {
+        color: #64748b;
+      }
+
+      .search-input:focus {
+        border-color: rgba(56, 189, 248, 0.45);
+        box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+      }
+
+      @media (max-width: 640px) {
+        .modal-panel {
+          padding: 1.15rem;
+        }
+      }
     </style>
   </head>
 
-  <body class="bg-[#0f172a] text-slate-200 selection:bg-blue-500/30">
+  <body>
     <nav
-      class="fixed top-0 w-full z-50 bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-800"
+      class="fixed top-0 z-50 w-full border-b border-slate-800/70 glass-panel"
     >
       <div
-        class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
+        class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-6"
       >
-        <span
-          class="text-xl font-bold tracking-tighter hover:text-blue-400 transition cursor-pointer uppercase"
-          >Shanilka<span>.dev</span></span
+        <a
+          href="#home"
+          class="brand-font text-lg font-bold tracking-[0.2em] text-slate-100 uppercase"
         >
-        <div class="flex gap-8 text-sm font-medium text-slate-400">
-          <a href="#projects" class="hover:text-white transition">Projects</a>
-          <a href="#skills" class="hover:text-white transition">Skills</a>
-          <a href="mailto:your@email.com" class="hover:text-white transition"
-            >Contact</a
-          >
+          Shanilka<span class="text-cyan-300">.dev</span>
+        </a>
+        <div class="hidden items-center gap-7 text-sm font-medium md:flex">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#work" class="nav-link">Work</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#contact" class="nav-link">Contact</a>
         </div>
+        <a
+          href="mailto:shanilka.thulshani@gmail.com"
+          class="ghost-button hidden md:inline-flex"
+        >
+          <i data-lucide="mail" class="h-4 w-4"></i>
+          Let us talk
+        </a>
       </div>
     </nav>
 
-    <header
-      class="pt-32 pb-20 px-6 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12"
-    >
-      <div class="flex-1 text-center md:text-left">
-        <span
-          class="px-3 py-1 text-xs font-semibold tracking-widest text-blue-400 uppercase bg-blue-400/10 rounded-full"
-          >Available for Internships</span
-        >
-        <h1
-          class="mt-6 text-5xl md:text-7xl font-extrabold tracking-tight text-white"
-        >
-          Computer <span class="gradient-text">Engineering UG.</span>
-        </h1>
-        <h4 class="mt-2 text-xl text-slate-400">
-          Faculty of Engineering, University of Ruhuna
-        </h4>
-        <p class="mt-6 text-lg text-slate-400 leading-relaxed max-w-xl">
-          I am a computer engineering student who loves learning new
-          technologies and solving problems. I am hardworking, eager to grow,
-          and ready to contribute to any team.
-        </p>
+    <main class="relative mx-auto max-w-6xl px-5 pt-28 sm:px-6">
+      <section id="home" class="relative overflow-hidden py-8 lg:py-14">
+        <div class="hero-orb one"></div>
+        <div class="hero-orb two"></div>
+        <div class="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+          <div class="reveal">
+            <div
+              class="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200"
+            >
+              <span class="h-2 w-2 rounded-full bg-cyan-300"></span>
+              Available for internships
+            </div>
 
+            <h1
+              class="brand-font text-5xl font-bold leading-tight text-white sm:text-6xl lg:text-7xl"
+            >
+              Computer engineering student building
+              <span class="gradient-text block"
+                >dynamic digital experiences.</span
+              >
+            </h1>
+
+            <div
+              class="mt-6 flex flex-wrap items-center gap-3 text-sm text-slate-300"
+            >
+              <span class="skill-pill"
+                ><i data-lucide="sparkles" class="h-4 w-4"></i
+                ><span id="typedRole">Computer Engineering UG</span></span
+              >
+              <span class="skill-pill">University of Ruhuna</span>
+              <span class="skill-pill">Problem solving</span>
+            </div>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-3">
+              <div class="stat-card reveal">
+                <div class="work-meta">Projects</div>
+                <div class="mt-2 text-3xl font-bold text-white" data-count="8">
+                  0
+                </div>
+                <p class="mt-2 text-sm text-slate-400">
+                  Selected work across development, design, ML, and
+                  infrastructure.
+                </p>
+              </div>
+              <div class="stat-card reveal">
+                <div class="work-meta">Focus areas</div>
+                <div class="mt-2 text-3xl font-bold text-white" data-count="4">
+                  0
+                </div>
+                <p class="mt-2 text-sm text-slate-400">
+                  Systems, frontend, UX, and cloud delivery.
+                </p>
+              </div>
+              <div class="stat-card reveal">
+                <div class="work-meta">Skill groups</div>
+                <div class="mt-2 text-3xl font-bold text-white" data-count="9">
+                  0
+                </div>
+                <p class="mt-2 text-sm text-slate-400">
+                  Languages, tools, frameworks, and data workflows.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#work" class="primary-button">
+                View work
+                <i data-lucide="arrow-right" class="h-4 w-4"></i>
+              </a>
+              <a
+                href="CV%20-%20Yapa%20Y.%20H.%20S.%20T..pdf"
+                download="cv - yapa y.h.s.t.pdf"
+                class="ghost-button"
+              >
+                Download CV
+                <i data-lucide="download" class="h-4 w-4"></i>
+              </a>
+            </div>
+
+            <div
+              class="mt-8 flex flex-wrap items-center gap-5 text-sm text-slate-400"
+            >
+              <a
+                href="https://github.com/Shanilka-Yapa"
+                target="_blank"
+                class="action-link"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  class="h-4 w-4 fill-current"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.58 2 12.24c0 4.52 2.87 8.35 6.84 9.7.5.09.68-.22.68-.48v-1.68c-2.78.62-3.37-1.34-3.37-1.34-.46-1.2-1.12-1.52-1.12-1.52-.92-.64.07-.63.07-.63 1.02.07 1.55 1.07 1.55 1.07.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.38-2.04 1.01-2.76-.1-.26-.44-1.31.1-2.73 0 0 .83-.27 2.7 1.05a9.11 9.11 0 0 1 4.92 0c1.87-1.32 2.7-1.05 2.7-1.05.54 1.42.2 2.47.1 2.73.63.72 1.01 1.64 1.01 2.76 0 3.95-2.35 4.81-4.58 5.06.36.32.68.96.68 1.93v2.86c0 .27.18.58.69.48A10.06 10.06 0 0 0 22 12.24C22 6.58 17.52 2 12 2Z"
+                  />
+                </svg>
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/shanilka-t-yapa-12115426b/"
+                target="_blank"
+                class="action-link"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  class="h-4 w-4 fill-current"
+                >
+                  <path
+                    d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.1 1 2.5 1 4.98 2.12 4.98 3.5ZM.3 8.98h4.4V24H.3V8.98ZM8.98 8.98h4.22v2.05h.06c.59-1.12 2.05-2.3 4.22-2.3 4.52 0 5.36 2.97 5.36 6.84V24h-4.4v-6.76c0-1.61-.03-3.68-2.24-3.68-2.25 0-2.59 1.75-2.59 3.56V24h-4.63V8.98Z"
+                  />
+                </svg>
+                LinkedIn
+              </a>
+              <a href="mailto:shanilka.thulshani@gmail.com" class="action-link">
+                <i data-lucide="mail" class="h-4 w-4"></i>
+                Email
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal lg:justify-self-end">
+            <div class="relative mx-auto w-full max-w-sm">
+              <div
+                class="absolute -inset-5 rounded-[2rem] bg-gradient-to-br from-cyan-400/20 via-violet-500/10 to-fuchsia-400/20 blur-2xl"
+              ></div>
+              <div
+                class="relative overflow-hidden rounded-[2rem] border border-slate-700/80 bg-slate-950/75 p-5 shadow-2xl shadow-cyan-950/30"
+              >
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <div class="work-meta">Profile</div>
+                    <h2 class="mt-2 brand-font text-2xl font-bold text-white">
+                      Shanilka T. Yapa
+                    </h2>
+                    <p class="mt-2 max-w-xs text-sm leading-7 text-slate-400">
+                      Computer Engineering undergraduate at the University of
+                      Ruhuna, focused on building useful products and clean
+                      interfaces.
+                    </p>
+                  </div>
+                  <span class="status-pill status-build">Build mode</span>
+                </div>
+
+                <div
+                  class="mt-6 overflow-hidden rounded-[1.5rem] border border-slate-700 bg-slate-900/70"
+                >
+                  <img
+                    src="profile.jpeg"
+                    alt="Shanilka T. Yapa"
+                    class="h-[22rem] w-full object-cover object-top"
+                  />
+                </div>
+
+                <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div class="stat-card">
+                    <div class="work-meta">Current direction</div>
+                    <p class="mt-2 text-sm text-slate-300">
+                      Internships and project opportunities
+                    </p>
+                  </div>
+                  <div class="stat-card">
+                    <div class="work-meta">Best fit</div>
+                    <p class="mt-2 text-sm text-slate-300">
+                      Full-stack, UI, systems, and cloud work
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" class="py-18 sm:py-24">
         <div
-          class="mt-8 flex items-center justify-center md:justify-start gap-6"
+          class="reveal mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"
         >
-          <a
-            href="https://github.com/Shanilka-Yapa"
-            target="_blank"
-            class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
-          >
-            <i data-lucide="github" class="w-5 h-5"></i>
-            <span class="text-sm font-medium font-mono">/github</span>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/shanilka-t-yapa-12115426b/"
-            target="_blank"
-            class="flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors"
-          >
-            <i data-lucide="linkedin" class="w-5 h-5"></i>
-            <span class="text-sm font-medium font-mono">/linkedin</span>
-          </a>
-          <a
-            href="mailto:shanilka.thulshani@gmail.com"
-            class="flex items-center gap-2 text-slate-400 hover:text-red-400 transition-colors"
-          >
-            <i data-lucide="mail" class="w-5 h-5"></i>
-            <span class="text-sm font-medium font-mono">/email</span>
-          </a>
+          <div>
+            <div class="work-meta">01. Selected work</div>
+            <h2
+              class="brand-font mt-3 text-3xl font-bold text-white sm:text-4xl"
+            >
+              A dynamic gallery of projects and design work
+            </h2>
+          </div>
+          <div class="w-full max-w-md">
+            <input
+              id="projectSearch"
+              type="search"
+              class="search-input"
+              placeholder="Search by title, tag, or keyword"
+            />
+          </div>
         </div>
 
-        <div class="mt-10 flex flex-wrap justify-center md:justify-start gap-4">
-          <a
-            href="#projects"
-            class="px-6 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-blue-400 hover:text-white transition-all shadow-lg shadow-blue-500/10"
-            >View Projects</a
-          >
-          <a
-            href="CV%20-%20Yapa%20Y.%20H.%20S.%20T..pdf"
-            download="cv - yapa y.h.s.t.pdf"
-            class="px-6 py-3 border border-slate-700 font-bold rounded-lg hover:bg-slate-800 transition-all"
-            >Download CV</a
-          >
+        <div class="reveal mb-6 flex flex-wrap gap-3" id="filterBar">
+          <button class="filter-pill active" data-filter="all">All</button>
+          <button class="filter-pill" data-filter="development">
+            Development
+          </button>
+          <button class="filter-pill" data-filter="design">Design</button>
+          <button class="filter-pill" data-filter="infrastructure">
+            Infrastructure
+          </button>
+          <button class="filter-pill" data-filter="machine-learning">
+            Machine Learning
+          </button>
+          <button class="filter-pill" data-filter="systems">Systems</button>
         </div>
-      </div>
 
-      <div class="relative group">
         <div
-          class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"
+          class="reveal mb-6 flex flex-wrap items-center justify-between gap-3 text-sm text-slate-400"
+        >
+          <p>
+            <span id="visibleCount" class="text-cyan-300">0</span> projects
+            visible
+          </p>
+        </div>
+
+        <div
+          id="workGrid"
+          class="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
         ></div>
+      </section>
 
-        <div
-          class="relative w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-full border-2 border-slate-700 bg-slate-800"
-        >
-          <img
-            src="profile.jpeg"
-            alt="Shanilka T. Yapa"
-            class="w-full h-full object-cover"
-          />
-
-          <div
-            class="absolute inset-0 flex items-center justify-center text-slate-500 -z-10"
-          >
-            <span>[ Photo ]</span>
-          </div>
+      <section id="skills" class="py-18 sm:py-24">
+        <div class="reveal mb-8">
+          <div class="work-meta">02. Technical stack</div>
+          <h2 class="brand-font mt-3 text-3xl font-bold text-white sm:text-4xl">
+            Skills that support the portfolio
+          </h2>
         </div>
-      </div>
-    </header>
 
-    <section id="projects" class="py-20 px-6 max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
-        <span class="text-blue-500">01.</span> Ongoing Projects
-      </h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- AR Waays -->
-        <div
-          class="group p-8 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition-all hover:bg-slate-800"
-        >
-          <div class="flex justify-between items-start mb-4">
-            <div class="p-3 bg-blue-500/10 rounded-lg text-blue-400">
-              <i data-lucide="map-pin" class="w-6 h-6"></i>
+        <div class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div
+            id="skillsGrid"
+            class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+          ></div>
+          <div class="reveal contact-card rounded-[1.5rem] p-6">
+            <div class="work-meta">How I work</div>
+            <h3 class="brand-font mt-3 text-2xl font-bold text-white">
+              Practical, iterative, and visual
+            </h3>
+            <p class="mt-3 text-slate-400 leading-7">
+              I like building in small slices: define the data, render the UI
+              from that data, then layer motion and interaction on top. That
+              approach keeps the portfolio easy to maintain and easier to
+              expand.
+            </p>
+            <div class="mt-6 grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
+              <div class="stat-card">
+                <div class="work-meta">Workflow</div>
+                <p class="mt-2">Plan, build, test, refine</p>
+              </div>
+              <div class="stat-card">
+                <div class="work-meta">Priority</div>
+                <p class="mt-2">Clarity over clutter</p>
+              </div>
             </div>
-            <span class="text-xs text-blue-400 font-mono">ONGOING</span>
           </div>
-
-          <h3
-            class="text-xl font-bold text-white group-hover:text-blue-400 transition"
-          >
-            AR Waays – Campus Navigation System
-          </h3>
-
-          <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-            Currently developing a mobile-based augmented reality navigation
-            system to guide users within the university campus using QR code
-            scanning, real-time camera view, and AR directional arrows with my
-            team.
-          </p>
-
-          <div class="mt-6 flex gap-3 text-xs font-mono text-blue-300">
-            <span>Unity</span>
-            <span>AR</span>
-            <span>QR Scanner</span>
-            <span>Firebase</span>
-          </div>
-
-          <a
-            href="https://github.com/Shanilka-Yapa/AR-campus-navigation-system---ARWayz.git"
-            target="_blank"
-            class="mt-4 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-blue-400 transition"
-          >
-            <i data-lucide="github" class="w-4 h-4"></i>
-            <span class="font-mono">View Repository</span>
-          </a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="figma" class="py-20 px-6 max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
-        <span class="text-blue-500">02.</span> Figma Designs
-      </h2>
-
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Design with VIDEO -->
-        <div
-          class="group p-6 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-purple-500/50 transition-all hover:bg-slate-800"
-        >
-          <iframe
-            src="https://drive.google.com/file/d/1IJPmYjxEvO18YbZSQYPvLvyBAaedi4Pv/preview"
-            width="100%"
-            height="260"
-            allow="autoplay"
-            class="rounded-lg mb-4 w-full"
-          ></iframe>
-          <h3
-            class="text-lg font-bold text-white group-hover:text-purple-400 transition"
-          >
-            Fitease – Fitness App UI
-          </h3>
-          <p class="mt-2 text-slate-400 text-sm">
-            A modern fitness app UI/UX design created in Figma, focused on
-            workout planning, progress tracking, and a clean user-friendly
-            experience with intuitive navigation.
-          </p>
-        </div>
-
-        <div
-          class="group p-6 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-purple-500/50 transition-all hover:bg-slate-800"
-        >
-          <iframe
-            src="https://drive.google.com/file/d/1MQ5R9xJZTpn2ePUb8hpbPBDejoPYsL7y/preview"
-            width="100%"
-            height="260"
-            allow="autoplay"
-            class="rounded-lg mb-4 w-full"
-          ></iframe>
-          <h3
-            class="text-lg font-bold text-white group-hover:text-purple-400 transition"
-          >
-            Cribcare - Innovation for Newborn Care
-          </h3>
-          <p class="mt-2 text-slate-400 text-sm">
-            Cribcare was designed to alert parents when their child enters a
-            danger zone on the smart mat. The mat is connected to the app,
-            allowing parents to monitor the child’s location in real time.
-          </p>
-        </div>
-
-        <div
-          class="group p-6 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-purple-500/50 transition-all hover:bg-slate-800"
-        >
-          <iframe
-            src="https://drive.google.com/file/d/15Eqgu8tyUFQUhZGqqgWgP2Skvq7p1-fX/preview"
-            width="100%"
-            height="260"
-            allow="autoplay"
-            class="rounded-lg mb-4 w-full"
-          ></iframe>
-          <h3
-            class="text-lg font-bold text-white group-hover:text-purple-400 transition"
-          >
-            Qaleesi - Volunteer Management App
-          </h3>
-          <p class="mt-2 text-slate-400 text-sm">
-            Qaleesi is a volunteering website, and this Figma design was created
-            as the initial prototype before developing the website.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="completed" class="py-20 px-6 max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
-        <span class="text-blue-500">03.</span> Completed projects
-      </h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- LibriCore -->
-        <div
-          class="group p-8 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition-all hover:bg-slate-800"
-        >
-          <iframe
-            src="https://drive.google.com/file/d/14OBt3E0eUdxnxm_UJFgpWnC8SEc9G6w1/preview"
-            width="100%"
-            height="260"
-            allow="autoplay"
-            class="rounded-lg mb-4 w-full"
-          ></iframe>
-
-          <div class="flex justify-between items-start mb-4">
-            <div class="p-3 bg-blue-500/10 rounded-lg text-blue-400">
-              <i data-lucide="server" class="w-6 h-6"></i>
+      <section id="contact" class="py-18 sm:py-24">
+        <div class="reveal contact-card rounded-[1.75rem] p-6 sm:p-8">
+          <div class="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            <div>
+              <div class="work-meta">03. Contact</div>
+              <h2
+                class="brand-font mt-3 text-3xl font-bold text-white sm:text-4xl"
+              >
+                Want a version of this portfolio tailored to a specific role?
+              </h2>
+              <p class="mt-4 max-w-2xl text-slate-400 leading-8">
+                I can adapt this layout for internships, freelance work, or a
+                job application, and connect it to a CMS or form backend later
+                if needed.
+              </p>
             </div>
-            <span class="text-xs text-blue-400 font-mono">ONGOING</span>
-          </div>
-
-          <h3
-            class="text-xl font-bold text-white group-hover:text-blue-400 transition"
-          >
-            LibriCore – Cloud-Based Library Management System
-          </h3>
-
-          <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-            Libricore is a full-stack, cloud-hosted library management system
-            with containerized frontend, backend, and database, automated CI/CD
-            using Jenkins, and deployment on AWS using Docker and infrastructure
-            automation.
-          </p>
-
-          <div class="mt-6 flex gap-3 text-xs font-mono text-blue-300">
-            <span>Docker</span>
-            <span>Jenkins</span>
-            <span>AWS</span>
-            <span>CI/CD</span>
-            <span>Terraform</span>
-          </div>
-
-          <a
-            href="https://github.com/Shanilka-Yapa/Libricore.git"
-            target="_blank"
-            class="mt-4 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-blue-400 transition"
-          >
-            <i data-lucide="github" class="w-4 h-4"></i>
-            <span class="font-mono">View Repository</span>
-          </a>
-        </div>
-
-        <!-- Qaleesi -->
-        <div
-          class="group p-8 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition-all hover:bg-slate-800"
-        >
-          <iframe
-            src="https://drive.google.com/file/d/15Eqgu8tyUFQUhZGqqgWgP2Skvq7p1-fX/preview"
-            width="100%"
-            height="260"
-            allow="autoplay"
-            class="rounded-lg mb-4 w-full"
-          ></iframe>
-
-          <div class="flex justify-between items-start mb-4">
-            <div class="p-3 bg-blue-500/10 rounded-lg text-blue-400">
-              <i data-lucide="server" class="w-6 h-6"></i>
+            <div class="grid gap-3">
+              <a
+                href="mailto:shanilka.thulshani@gmail.com"
+                class="primary-button justify-center"
+              >
+                Email me
+                <i data-lucide="mail" class="h-4 w-4"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/shanilka-t-yapa-12115426b/"
+                target="_blank"
+                class="ghost-button justify-center"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  class="h-4 w-4 fill-current"
+                >
+                  <path
+                    d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.1 1 2.5 1 4.98 2.12 4.98 3.5ZM.3 8.98h4.4V24H.3V8.98ZM8.98 8.98h4.22v2.05h.06c.59-1.12 2.05-2.3 4.22-2.3 4.52 0 5.36 2.97 5.36 6.84V24h-4.4v-6.76c0-1.61-.03-3.68-2.24-3.68-2.25 0-2.59 1.75-2.59 3.56V24h-4.63V8.98Z"
+                  />
+                </svg>
+                LinkedIn profile
+              </a>
+              <a
+                href="https://github.com/Shanilka-Yapa"
+                target="_blank"
+                class="ghost-button justify-center"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  class="h-4 w-4 fill-current"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.58 2 12.24c0 4.52 2.87 8.35 6.84 9.7.5.09.68-.22.68-.48v-1.68c-2.78.62-3.37-1.34-3.37-1.34-.46-1.2-1.12-1.52-1.12-1.52-.92-.64.07-.63.07-.63 1.02.07 1.55 1.07 1.55 1.07.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.38-2.04 1.01-2.76-.1-.26-.44-1.31.1-2.73 0 0 .83-.27 2.7 1.05a9.11 9.11 0 0 1 4.92 0c1.87-1.32 2.7-1.05 2.7-1.05.54 1.42.2 2.47.1 2.73.63.72 1.01 1.64 1.01 2.76 0 3.95-2.35 4.81-4.58 5.06.36.32.68.96.68 1.93v2.86c0 .27.18.58.69.48A10.06 10.06 0 0 0 22 12.24C22 6.58 17.52 2 12 2Z"
+                  />
+                </svg>
+                GitHub profile
+              </a>
             </div>
-            <span class="text-xs text-blue-400 font-mono">COMPLETED</span>
-          </div>
-
-          <h3
-            class="text-xl font-bold text-white group-hover:text-blue-400 transition"
-          >
-            Qaleesi – Volunteering Platform
-          </h3>
-
-          <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-            Qaleesi is a volunteering platform designed especially for girls,
-            developed for the EC4307 Web Application Development module. It
-            includes authentication, profile management, idea sharing with
-            images, CRUD for ideas, and user-to-user messaging.
-          </p>
-
-          <div class="mt-6 flex gap-3 text-xs font-mono text-blue-300">
-            <span>Signup/Login</span>
-            <span>Profile Management</span>
-            <span>Idea CRUD</span>
-            <span>Messaging</span>
-          </div>
-
-          <div class="mt-3 flex gap-3 text-xs font-mono text-blue-300">
-            <span>React</span>
-            <span>Node.js</span>
-            <span>Express.js</span>
-            <span>MongoDB</span>
-            <span>Inline CSS</span>
-          </div>
-
-          <a
-            href="https://github.com/Shanilka-Yapa/Qaleesi_5435.git"
-            target="_blank"
-            class="mt-4 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-blue-400 transition"
-          >
-            <i data-lucide="github" class="w-4 h-4"></i>
-            <span class="font-mono">View Repository</span>
-          </a>
-        </div>
-
-        <!-- Lan file drop -->
-        <div
-          class="group p-8 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition-all hover:bg-slate-800"
-        >
-          <div class="flex justify-between items-start mb-4">
-            <div class="p-3 bg-blue-500/10 rounded-lg text-blue-400">
-              <i data-lucide="map-pin" class="w-6 h-6"></i>
-            </div>
-            <span class="text-xs text-blue-400 font-mono">COMPLETED</span>
-          </div>
-
-          <h3
-            class="text-xl font-bold text-white group-hover:text-blue-400 transition"
-          >
-            LAN File Drop – Local Network File Sharing System
-          </h3>
-
-          <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-            Developed a network programming project to enable fast file and
-            folder transfer between devices on the same LAN. Built a C++
-            socket-based backend with UDP device discovery and TCP-based
-            reliable transfer for single files, multiple files, and full folder
-            structures. Added transfer logging with timestamps and remote IP
-            tracking to monitor activity. Also developed a lightweight web
-            interface for sending/receiving files, viewing live logs, and LAN
-            screen mirroring to improve usability over a CLI-only workflow.
-          </p>
-
-          <div class="mt-6 flex gap-3 text-xs font-mono text-blue-300">
-            <span>C++</span>
-            <span>Node.js</span>
-            <span>Express.js</span>
-            <span>Multer</span>
-          </div>
-
-          <a
-            href="https://github.com/Mesit-Rathnayake/LAN_File_Drop.git"
-            target="_blank"
-            class="mt-4 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-blue-400 transition"
-          >
-            <i data-lucide="github" class="w-4 h-4"></i>
-            <span class="font-mono">View Repository</span>
-          </a>
-        </div>
-
-        <!-- Book Recommendation -->
-        <div
-          class="group p-8 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition-all hover:bg-slate-800"
-        >
-          <div class="flex justify-between items-start mb-4">
-            <div class="p-3 bg-blue-500/10 rounded-lg text-blue-400">
-              <i data-lucide="layers" class="w-6 h-6"></i>
-            </div>
-            <span class="text-xs text-blue-400 font-mono">COMPLETED</span>
-          </div>
-
-          <h3
-            class="text-xl font-bold text-white group-hover:text-blue-400 transition"
-          >
-            Book recommendation System – Machine Learning Project
-          </h3>
-
-          <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-            Developed a machine learning project to cluster books based on
-            reader engagement and metadata features from the Goodreads dataset.
-            Using attributes like average rating, ratings count, text review
-            count, number of pages, publication year, and genre to identify
-            natural book categories (e.g., short popular books vs. long niche
-            titles). Compared partitional and hierarchical clustering techniques
-            to uncover patterns in reader preferences.
-          </p>
-
-          <div class="mt-6 flex gap-3 text-xs font-mono text-blue-300">
-            <span>Python</span>
-            <span>Pandas</span>
-            <span>Scikit-learn</span>
-            <span>Matplotlib</span>
-            <span>Seaborn</span>
-          </div>
-
-          <a
-            href="https://github.com/Shanilka-Yapa/ML-Classification-Project"
-            target="_blank"
-            class="mt-4 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-blue-400 transition"
-          >
-            <i data-lucide="github" class="w-4 h-4"></i>
-            <span class="font-mono">View Repository</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="py-20 bg-slate-800/30">
-      <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
-          <span class="text-blue-500">04.</span> Technical Stack
-        </h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div
-            class="p-4 bg-slate-900 border border-slate-800 rounded-lg text-center font-medium hover:border-blue-500 transition-colors cursor-default"
-          >
-            C / C++
-          </div>
-          <div
-            class="p-4 bg-slate-900 border border-slate-800 rounded-lg text-center font-medium hover:border-blue-500 transition-colors cursor-default"
-          >
-            Python
-          </div>
-          <div
-            class="p-4 bg-slate-900 border border-slate-800 rounded-lg text-center font-medium hover:border-blue-500 transition-colors cursor-default"
-          >
-            Assembly
-          </div>
-          <div
-            class="p-4 bg-slate-900 border border-slate-800 rounded-lg text-center font-medium hover:border-blue-500 transition-colors cursor-default"
-          >
-            Verilog
-          </div>
-          <div
-            class="p-4 bg-slate-900 border border-slate-800 rounded-lg text-center font-medium hover:border-blue-500 transition-colors cursor-default"
-          >
-            SQL
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
     <footer
-      class="py-10 text-center text-slate-500 text-xs border-t border-slate-800"
+      class="border-t border-slate-800/70 py-8 text-center text-xs text-slate-500"
     >
       <p>&copy; 2026 Designed & Built by Shanilka T. Yapa</p>
     </footer>
 
+    <div id="detailModal" class="modal-backdrop" aria-hidden="true">
+      <div class="modal-panel">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <div id="modalMeta" class="work-meta">Project</div>
+            <h3
+              id="modalTitle"
+              class="brand-font mt-2 text-2xl font-bold text-white"
+            ></h3>
+          </div>
+          <button
+            id="modalClose"
+            class="ghost-button px-3 py-2"
+            aria-label="Close details"
+          >
+            <i data-lucide="x" class="h-4 w-4"></i>
+          </button>
+        </div>
+        <p id="modalDescription" class="mt-4 text-slate-300 leading-8"></p>
+        <div id="modalTags" class="mt-5 flex flex-wrap gap-2"></div>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            id="modalPrimaryLink"
+            href="#"
+            target="_blank"
+            class="primary-button"
+            >Open link</a
+          >
+          <a href="#work" class="ghost-button">Back to work</a>
+        </div>
+      </div>
+    </div>
+
     <script>
-      lucide.createIcons();
+      const fallbackPortfolioItems = [];
+      let portfolioItems = [];
+
+      const skills = [
+        { name: "C / C++", level: 88, note: "Systems and networking" },
+        { name: "Python", level: 84, note: "Data and automation" },
+        { name: "React", level: 78, note: "UI and front-end" },
+        { name: "Node.js", level: 76, note: "Backend APIs" },
+        { name: "SQL", level: 74, note: "Relational modeling" },
+        { name: "Docker", level: 72, note: "Container workflows" },
+        { name: "AWS", level: 70, note: "Cloud deployment" },
+        { name: "Assembly", level: 62, note: "Low-level concepts" },
+        { name: "Verilog", level: 60, note: "Digital design" },
+      ];
+
+      const roleMessages = [
+        "Computer Engineering UG",
+        "UI builder and systems thinker",
+        "Open to internships and projects",
+      ];
+
+      const workGrid = document.getElementById("workGrid");
+      const skillsGrid = document.getElementById("skillsGrid");
+      const projectSearch = document.getElementById("projectSearch");
+      const visibleCount = document.getElementById("visibleCount");
+      const filterButtons = Array.from(
+        document.querySelectorAll("[data-filter]"),
+      );
+      const modal = document.getElementById("detailModal");
+      const modalMeta = document.getElementById("modalMeta");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalDescription = document.getElementById("modalDescription");
+      const modalTags = document.getElementById("modalTags");
+      const modalPrimaryLink = document.getElementById("modalPrimaryLink");
+      const modalClose = document.getElementById("modalClose");
+      const typedRole = document.getElementById("typedRole");
+
+      let activeFilter = "all";
+      let searchValue = "";
+
+      function escapeHtml(text) {
+        return text
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+      }
+
+      function statusClass(status) {
+        if (status === "Ongoing") {
+          return "status-ongoing";
+        }
+
+        if (status === "Design") {
+          return "status-design";
+        }
+
+        if (status === "Completed") {
+          return "status-completed";
+        }
+
+        return "status-build";
+      }
+
+      function renderWorkItems() {
+        const query = searchValue.trim().toLowerCase();
+
+        const filteredItems = portfolioItems.filter((item) => {
+          const matchesFilter =
+            activeFilter === "all" || item.category === activeFilter;
+          const haystack = [
+            item.title,
+            item.summary,
+            item.details,
+            ...item.tags,
+          ]
+            .join(" ")
+            .toLowerCase();
+          const matchesQuery = !query || haystack.includes(query);
+          return matchesFilter && matchesQuery;
+        });
+
+        workGrid.innerHTML = filteredItems
+          .map((item) => {
+            const primaryLink = item.links[0];
+            return `
+              <article class="work-card reveal is-visible" data-category="${item.category}">
+                <div class="flex items-start justify-between gap-4">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3">
+                      <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-300">
+                        <i data-lucide="${item.icon}" class="h-5 w-5"></i>
+                      </span>
+                      <div>
+                        <div class="work-meta">${item.category.replaceAll("-", " ")}</div>
+                        <h3 class="work-title mt-1">${escapeHtml(item.title)}</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="status-pill ${statusClass(item.status)}">${item.status}</span>
+                </div>
+                <p class="work-copy mt-4">${escapeHtml(item.summary)}</p>
+                <div class="mt-5 flex flex-wrap gap-2">
+                  ${item.tags.map((tag) => `<span class="tag-pill">${escapeHtml(tag)}</span>`).join("")}
+                </div>
+                <div class="work-actions">
+                  <button type="button" class="ghost-button" data-open-item="${item.id}">
+                    View details
+                    <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+                  </button>
+                  <a class="primary-button" href="${primaryLink.href}" target="_blank" rel="noreferrer">
+                    ${escapeHtml(primaryLink.label)}
+                    <i data-lucide="external-link" class="h-4 w-4"></i>
+                  </a>
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+
+        visibleCount.textContent = String(filteredItems.length);
+        lucide.createIcons();
+        attachCardHandlers();
+      }
+
+      function renderSkills() {
+        skillsGrid.innerHTML = skills
+          .map(
+            (skill) => `
+              <article class="skill-card reveal">
+                <div class="skill-head">
+                  <div>
+                    <div class="work-title text-lg">${escapeHtml(skill.name)}</div>
+                    <p class="mt-1 text-sm text-slate-400">${escapeHtml(skill.note)}</p>
+                  </div>
+                  <span class="skill-pill">${skill.level}%</span>
+                </div>
+                <div class="skill-track" style="--skill-level: ${skill.level}%">
+                  <div class="skill-fill"></div>
+                </div>
+              </article>
+            `,
+          )
+          .join("");
+      }
+
+      async function loadPortfolioItems() {
+        try {
+          const response = await fetch("projects.json", { cache: "no-store" });
+
+          if (!response.ok) {
+            throw new Error(
+              `Unable to load projects.json (${response.status})`,
+            );
+          }
+
+          portfolioItems = await response.json();
+        } catch (error) {
+          portfolioItems = fallbackPortfolioItems;
+          console.warn(
+            "Using embedded project fallback because projects.json could not be loaded.",
+            error,
+          );
+        }
+      }
+
+      function openModal(itemId) {
+        const item = portfolioItems.find((entry) => entry.id === itemId);
+
+        if (!item) {
+          return;
+        }
+
+        modalMeta.textContent = item.category.replaceAll("-", " ");
+        modalTitle.textContent = item.title;
+        modalDescription.textContent = item.details;
+        modalTags.innerHTML = item.tags
+          .map((tag) => `<span class="tag-pill">${escapeHtml(tag)}</span>`)
+          .join("");
+        modalPrimaryLink.textContent = item.links[0].label;
+        modalPrimaryLink.href = item.links[0].href;
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+      }
+
+      function closeModal() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+      }
+
+      function attachCardHandlers() {
+        document.querySelectorAll("[data-open-item]").forEach((button) => {
+          button.addEventListener("click", () =>
+            openModal(button.getAttribute("data-open-item")),
+          );
+        });
+      }
+
+      function animateCounters() {
+        document.querySelectorAll("[data-count]").forEach((element) => {
+          const target = Number(element.getAttribute("data-count") || "0");
+          let current = 0;
+          const step = Math.max(1, Math.ceil(target / 30));
+
+          const timer = window.setInterval(() => {
+            current += step;
+            if (current >= target) {
+              current = target;
+              window.clearInterval(timer);
+            }
+            element.textContent = String(current);
+          }, 24);
+        });
+      }
+
+      function startTyping() {
+        let roleIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        const tick = () => {
+          const phrase = roleMessages[roleIndex];
+          typedRole.textContent = phrase.slice(0, charIndex);
+
+          if (!deleting && charIndex < phrase.length) {
+            charIndex += 1;
+          } else if (!deleting && charIndex === phrase.length) {
+            deleting = true;
+            window.setTimeout(tick, 1200);
+            return;
+          } else if (deleting && charIndex > 0) {
+            charIndex -= 1;
+          } else {
+            deleting = false;
+            roleIndex = (roleIndex + 1) % roleMessages.length;
+          }
+
+          window.setTimeout(tick, deleting ? 35 : 55);
+        };
+
+        tick();
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+            }
+          });
+        },
+        { threshold: 0.2 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((element) => observer.observe(element));
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeFilter = button.getAttribute("data-filter") || "all";
+          filterButtons.forEach((entry) =>
+            entry.classList.toggle("active", entry === button),
+          );
+          renderWorkItems();
+        });
+      });
+
+      projectSearch.addEventListener("input", (event) => {
+        searchValue = event.target.value;
+        renderWorkItems();
+      });
+
+      modalClose.addEventListener("click", closeModal);
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeModal();
+        }
+      });
+
+      const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            navLinks.forEach((link) => {
+              const target = link.getAttribute("href")?.slice(1);
+              link.classList.toggle("active", target === entry.target.id);
+            });
+          });
+        },
+        { threshold: 0.45 },
+      );
+
+      ["home", "work", "skills", "contact"].forEach((id) => {
+        const section = document.getElementById(id);
+        if (section) {
+          sectionObserver.observe(section);
+        }
+      });
+
+      (async () => {
+        await loadPortfolioItems();
+        renderSkills();
+        renderWorkItems();
+        document
+          .querySelectorAll(".skill-card")
+          .forEach((element) => observer.observe(element));
+        startTyping();
+        animateCounters();
+        lucide.createIcons();
+      })();
     </script>
   </body>
 </html>
