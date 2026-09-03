@@ -47,6 +47,27 @@
           rgba(0, 0, 0, 0.85),
           transparent 92%);
       opacity: 0.35;
+      z-index: 1;
+    }
+
+    #sparkleCanvas,
+    #trailCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #trailCanvas {
+      opacity: 0.85;
+      mix-blend-mode: screen;
+      filter: blur(24px);
+    }
+
+    #sparkleCanvas {
+      opacity: 0.85;
     }
 
     .brand-font {
@@ -411,6 +432,8 @@
 </head>
 
 <body>
+  <canvas id="sparkleCanvas" aria-hidden="true"></canvas>
+  <canvas id="trailCanvas" aria-hidden="true"></canvas>
   <nav class="fixed top-0 z-50 w-full border-b border-slate-800/70 glass-panel">
     <div class="mx-auto flex max-w-[1520px] items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
       <a href="#home" class="brand-font text-lg font-bold tracking-[0.2em] text-slate-100 uppercase">
@@ -456,7 +479,7 @@
           <div class="mt-8 grid gap-4 sm:grid-cols-3">
             <div class="stat-card reveal">
               <div class="work-meta">Projects</div>
-              <div class="mt-2 text-3xl font-bold text-white" data-count="8">
+              <div class="mt-2 text-3xl font-bold text-white" data-count="10">
                 0
               </div>
               <p class="mt-2 text-sm text-slate-400">
@@ -1024,6 +1047,142 @@
       animateCounters();
       lucide.createIcons();
     })();
+
+    // Pure soft ambient light trail (smooth diffused glow, zero hard lines)
+    const trailCanvas = document.getElementById("trailCanvas");
+    if (trailCanvas && window.matchMedia("(pointer: fine)").matches) {
+      const tCtx = trailCanvas.getContext("2d");
+      let tWidth = (trailCanvas.width = window.innerWidth);
+      let tHeight = (trailCanvas.height = window.innerHeight);
+
+      window.addEventListener("resize", () => {
+        tWidth = trailCanvas.width = window.innerWidth;
+        tHeight = trailCanvas.height = window.innerHeight;
+      });
+
+      const lights = [];
+      let lastX = -100;
+      let lastY = -100;
+
+      window.addEventListener("mousemove", (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        if (lastX !== -100) {
+          const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+          // Interpolate luminous clouds for ultra-smooth fluid flow
+          const steps = Math.min(8, Math.max(1, Math.floor(dist / 14)));
+          for (let i = 0; i < steps; i++) {
+            const t = i / steps;
+            lights.push({
+              x: lastX + (mouseX - lastX) * t,
+              y: lastY + (mouseY - lastY) * t,
+              radius: Math.min(75, Math.max(42, dist * 0.8 + 35)),
+              alpha: 1.0,
+              decay: 0.045,
+              color: i % 2 === 0 ? "56, 189, 248" : "14, 165, 233",
+            });
+          }
+        }
+
+        lastX = mouseX;
+        lastY = mouseY;
+      });
+
+      document.addEventListener("mouseleave", () => {
+        lastX = -100;
+        lastY = -100;
+      });
+
+      function renderLightTrail() {
+        tCtx.clearRect(0, 0, tWidth, tHeight);
+
+        for (let i = lights.length - 1; i >= 0; i--) {
+          const l = lights[i];
+          l.alpha -= l.decay;
+
+          if (l.alpha <= 0) {
+            lights.splice(i, 1);
+            continue;
+          }
+
+          // Soft diffused radiant aura (no borders, no hard strokes)
+          const grad = tCtx.createRadialGradient(l.x, l.y, 0, l.x, l.y, l.radius);
+          grad.addColorStop(0, `rgba(${l.color}, ${l.alpha * 0.28})`);
+          grad.addColorStop(0.45, `rgba(${l.color}, ${l.alpha * 0.12})`);
+          grad.addColorStop(1, "rgba(56, 189, 248, 0)");
+
+          tCtx.beginPath();
+          tCtx.arc(l.x, l.y, l.radius, 0, Math.PI * 2);
+          tCtx.fillStyle = grad;
+          tCtx.fill();
+        }
+
+        requestAnimationFrame(renderLightTrail);
+      }
+
+      renderLightTrail();
+    }
+
+    // Ambient dynamic sparkle particles background
+    const sparkleCanvas = document.getElementById("sparkleCanvas");
+    if (sparkleCanvas) {
+      const sCtx = sparkleCanvas.getContext("2d");
+      let sWidth = (sparkleCanvas.width = window.innerWidth);
+      let sHeight = (sparkleCanvas.height = window.innerHeight);
+
+      window.addEventListener("resize", () => {
+        sWidth = sparkleCanvas.width = window.innerWidth;
+        sHeight = sparkleCanvas.height = window.innerHeight;
+      });
+
+      const sparkleCount = Math.min(50, Math.floor((sWidth * sHeight) / 24000));
+      const sparkles = [];
+
+      for (let i = 0; i < sparkleCount; i++) {
+        sparkles.push({
+          x: Math.random() * sWidth,
+          y: Math.random() * sHeight,
+          size: Math.random() * 2 + 0.8,
+          baseAlpha: Math.random() * 0.4 + 0.2,
+          alpha: 0,
+          speed: Math.random() * 0.02 + 0.008,
+          phase: Math.random() * Math.PI * 2,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          color: i % 3 === 0 ? "56, 189, 248" : i % 3 === 1 ? "168, 85, 247" : "224, 242, 254",
+        });
+      }
+
+      function renderSparkles() {
+        sCtx.clearRect(0, 0, sWidth, sHeight);
+
+        sparkles.forEach((s) => {
+          s.phase += s.speed;
+          s.alpha = s.baseAlpha + Math.sin(s.phase) * (s.baseAlpha * 0.7);
+
+          s.x += s.vx;
+          s.y += s.vy;
+
+          if (s.x < 0) s.x = sWidth;
+          if (s.x > sWidth) s.x = 0;
+          if (s.y < 0) s.y = sHeight;
+          if (s.y > sHeight) s.y = 0;
+
+          sCtx.beginPath();
+          sCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          sCtx.fillStyle = `rgba(${s.color}, ${Math.max(0, s.alpha)})`;
+          sCtx.shadowBlur = 6;
+          sCtx.shadowColor = `rgba(${s.color}, 0.8)`;
+          sCtx.fill();
+          sCtx.shadowBlur = 0;
+        });
+
+        requestAnimationFrame(renderSparkles);
+      }
+
+      renderSparkles();
+    }
   </script>
 </body>
 

@@ -7,11 +7,72 @@
     "icon": "map-pin",
     "summary": "A mobile-based augmented reality navigation system for guiding users within the university campus using QR scanning, camera-based navigation, and directional AR arrows.",
     "details": "Currently developing a mobile-based augmented reality navigation system to guide users within the university campus using QR code scanning, real-time camera view, and AR directional arrows with my team.",
-    "tags": ["Unity", "AR", "QR Scanner", "Firebase"],
+    "tags": [
+      "Unity",
+      "AR",
+      "QR Scanner",
+      "Firebase"
+    ],
     "links": [
       {
         "label": "View repository",
         "href": "https://github.com/Shanilka-Yapa/AR-campus-navigation-system---ARWayz.git"
+      }
+    ]
+  },
+  {
+    "id": "traffic-fine-system",
+    "title": "Traffic Fine Management System",
+    "category": "development",
+    "status": "Completed",
+    "icon": "shield-alert",
+    "summary": "A comprehensive digital platform designed to modernize traffic fine management with user & admin dashboards, secure authentication, fine tracking, and online payment integrations.",
+    "details": "A comprehensive digital platform designed to modernize traffic fine management. The system allows traffic violations and fines to be managed digitally, while providing separate interfaces for users and administrators. It also supports secure authentication, fine tracking, online payments, and notifications.\n\nKey Features:\n• Digital traffic fine and violation management\n• Separate user and administrative dashboards\n• Secure authentication and user management\n• Fine tracking and management\n• Online payment integration with PayHere and Stripe\n• Notification functionality\n• Responsive web and mobile interfaces",
+    "tags": [
+      "Flutter",
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "NestJS",
+      "Prisma",
+      "PostgreSQL",
+      "PayHere",
+      "Stripe"
+    ],
+    "links": [
+      {
+        "label": "View live demo",
+        "href": "https://lnkd.in/p/gnFZFxhd"
+      },
+      {
+        "label": "View repository",
+        "href": "https://github.com/Mesit-Rathnayake/Traffic-Fine-System.git"
+      }
+    ]
+  },
+  {
+    "id": "acadex",
+    "title": "Acadex - Academic Management App",
+    "category": "development",
+    "status": "Ongoing",
+    "icon": "graduation-cap",
+    "summary": "A personal academic management and productivity application designed to help university students organize and track their academic activities in one place.",
+    "details": "A personal academic management application designed to help university students organize and track their academic activities in one place. Acadex provides tools for calculating GPA, monitoring attendance, managing exams and assignments, and organizing weekly timetables.\n\nKey Features:\n• GPA calculator with semester and module management\n• Attendance tracking and percentage calculation\n• Exam management and organization\n• Assignment tracking with deadline management\n• Weekly timetable management\n• Module-based academic organization\n• Local data storage for saving user information\n• Clean and responsive user interface",
+    "tags": [
+      "Flutter",
+      "Dart",
+      "Hive",
+      "Mobile",
+      "Productivity"
+    ],
+    "links": [
+      {
+        "label": "View live demo",
+        "href": "https://www.linkedin.com/posts/shanilka-t-yapa-12115426b_flutter-dart-mobileappdevelopment-activity-7496073018083856384-eRDX?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEINLKkBkCjkgV7kh0aDCuP6wpVdHQvoTQk"
+      },
+      {
+        "label": "View repository",
+        "href": "https://github.com/Shanilka-Yapa/Acadex.git"
       }
     ]
   },
@@ -23,11 +84,16 @@
     "icon": "monitor-smartphone",
     "summary": "A Figma prototype for a fitness app focused on workout planning, tracking, and clean user navigation.",
     "details": "A modern fitness app UI/UX design created in Figma, focused on workout planning, progress tracking, and a clean user-friendly experience with intuitive navigation.",
-    "tags": ["Figma", "UI/UX", "Mobile", "Prototype"],
+    "tags": [
+      "Figma",
+      "UI/UX",
+      "Mobile",
+      "Prototype"
+    ],
     "links": [
       {
         "label": "Open preview",
-        "href": "https://drive.google.com/file/d/1IJPmYjxEvO18YbZSQYPvLvyBAaedi4Pv/preview"
+        "href": "https://www.linkedin.com/posts/shanilka-t-yapa-12115426b_uxdesign-uidesign-fitnessapp-activity-7307611971414110208-89_p?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEINLKkBkCjkgV7kh0aDCuP6wpVdHQvoTQk"
       }
     ]
   },
@@ -39,11 +105,16 @@
     "icon": "baby",
     "summary": "A smart-care concept that alerts parents when a child enters a danger zone on the connected mat.",
     "details": "Cribcare was designed to alert parents when their child enters a danger zone on the smart mat. The mat is connected to the app, allowing parents to monitor the child’s location in real time.",
-    "tags": ["Figma", "Health Tech", "Monitoring", "Alerting"],
+    "tags": [
+      "Figma",
+      "Health Tech",
+      "Monitoring",
+      "Alerting"
+    ],
     "links": [
       {
         "label": "Open preview",
-        "href": "https://drive.google.com/file/d/1MQ5R9xJZTpn2ePUb8hpbPBDejoPYsL7y/preview"
+        "href": "https://www.linkedin.com/posts/shanilka-t-yapa-12115426b_eminence5-teamquadra-uiux-activity-7419255510853660673-1EqX?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEINLKkBkCjkgV7kh0aDCuP6wpVdHQvoTQk"
       }
     ]
   },
@@ -55,7 +126,12 @@
     "icon": "layout-template",
     "summary": "The initial Figma prototype for the volunteering platform before development started.",
     "details": "Qaleesi is a volunteering website, and this Figma design was created as the initial prototype before developing the website.",
-    "tags": ["Figma", "Prototype", "Volunteer Tech", "Product Design"],
+    "tags": [
+      "Figma",
+      "Prototype",
+      "Volunteer Tech",
+      "Product Design"
+    ],
     "links": [
       {
         "label": "Open preview",
@@ -71,11 +147,21 @@
     "icon": "server",
     "summary": "A cloud-hosted library system with containerized services, CI/CD, and AWS deployment automation.",
     "details": "LibriCore is a full-stack, cloud-hosted library management system with containerized frontend, backend, and database, automated CI/CD using Jenkins, and deployment on AWS using Docker and infrastructure automation.",
-    "tags": ["Docker", "Jenkins", "AWS", "CI/CD", "Terraform"],
+    "tags": [
+      "Docker",
+      "Jenkins",
+      "AWS",
+      "CI/CD",
+      "Terraform"
+    ],
     "links": [
       {
         "label": "View repository",
         "href": "https://github.com/Shanilka-Yapa/Libricore.git"
+      },
+      {
+        "label": "View live demo",
+        "href": "https://www.linkedin.com/posts/shanilka-t-yapa-12115426b_devops-fullstack-react-activity-7429024562266402816-snx_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEINLKkBkCjkgV7kh0aDCuP6wpVdHQvoTQk"
       }
     ]
   },
@@ -87,7 +173,12 @@
     "icon": "users",
     "summary": "A full-stack volunteering platform with authentication, profiles, idea sharing, CRUD, and messaging.",
     "details": "Qaleesi is a volunteering platform designed especially for girls, developed for the EC4307 Web Application Development module. It includes authentication, profile management, idea sharing with images, CRUD for ideas, and user-to-user messaging.",
-    "tags": ["React", "Node.js", "Express.js", "MongoDB"],
+    "tags": [
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB"
+    ],
     "links": [
       {
         "label": "View repository",
@@ -103,7 +194,12 @@
     "icon": "folder-closed",
     "summary": "A LAN file-transfer tool with C++ sockets, device discovery, and a lightweight web interface.",
     "details": "Developed a network programming project to enable fast file and folder transfer between devices on the same LAN. Built a C++ socket-based backend with UDP device discovery and TCP-based reliable transfer for single files, multiple files, and full folder structures. Added transfer logging with timestamps and remote IP tracking to monitor activity. Also developed a lightweight web interface for sending and receiving files, viewing live logs, and LAN screen mirroring to improve usability over a CLI-only workflow.",
-    "tags": ["C++", "Node.js", "Express.js", "Multer"],
+    "tags": [
+      "C++",
+      "Node.js",
+      "Express.js",
+      "Multer"
+    ],
     "links": [
       {
         "label": "View repository",
@@ -119,7 +215,13 @@
     "icon": "brain-circuit",
     "summary": "A clustering project that finds patterns in reader engagement and book metadata.",
     "details": "Developed a machine learning project to cluster books based on reader engagement and metadata features from the Goodreads dataset. Using attributes like average rating, ratings count, text review count, number of pages, publication year, and genre to identify natural book categories such as short popular books versus long niche titles. Compared partitional and hierarchical clustering techniques to uncover patterns in reader preferences.",
-    "tags": ["Python", "Pandas", "Scikit-learn", "Matplotlib", "Seaborn"],
+    "tags": [
+      "Python",
+      "Pandas",
+      "Scikit-learn",
+      "Matplotlib",
+      "Seaborn"
+    ],
     "links": [
       {
         "label": "View repository",
