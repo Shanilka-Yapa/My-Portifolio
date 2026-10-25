@@ -1,84 +1,93 @@
-import {
-  ArrowUpRight,
-  Baby,
-  BrainCircuit,
-  Code,
-  FolderClosed,
-  GraduationCap,
-  LayoutTemplate,
-  MapPin,
-  MonitorSmartphone,
-  Server,
-  ShieldAlert,
-  Users,
-} from "lucide-react";
-import { useScrollReveal } from "../../hooks/useScrollReveal.js";
-import { formatCategory, getProjectIcon } from "./projectUtils.js";
+import { ArrowUpRight, Code } from "lucide-react";
+import { formatCategory } from "./projectUtils.js";
+import ProjectMedia from "./ProjectMedia.jsx";
 
-const icons = {
-  MapPin,
-  ShieldAlert,
-  GraduationCap,
-  MonitorSmartphone,
-  Baby,
-  LayoutTemplate,
-  Server,
-  Users,
-  FolderClosed,
-  BrainCircuit,
-  Code,
-};
-
-export default function ProjectCard({ project, onOpen }) {
-  const { ref, isVisible } = useScrollReveal();
-  const Icon = icons[getProjectIcon(project.icon)] ?? Code;
+export default function ProjectCard({
+  project,
+  stackIndex,
+  direction,
+  dragOffset,
+  isActive,
+  isAnimating,
+  onOpen,
+  onAdvance,
+}) {
   const primaryLink = project.links[0];
+  const subtitle =
+    project.subtitle ??
+    project.summary.split(/[.!?]/)[0].trim();
   const statusClass = project.status.toLowerCase().replaceAll(" ", "-");
+  const cardStyle = {
+    "--stack-index": stackIndex,
+    "--drag-offset": `${dragOffset}px`,
+    "--drag-rotation": `${dragOffset * 0.035}deg`,
+    "--drag-opacity": Math.max(0.65, 1 - Math.abs(dragOffset) / 800),
+    "--direction": direction,
+  };
 
   return (
     <article
-      ref={ref}
-      className={`work-card reveal flex h-full flex-col ${isVisible ? "is-visible" : ""}`}
+      className={`project-deck-card ${isActive ? "is-active" : "is-background"} ${isAnimating && isActive ? "is-exiting" : ""}`}
+      style={cardStyle}
+      aria-hidden={!isActive}
+      aria-label={isActive ? `Open details for ${project.title}` : undefined}
+      tabIndex={isActive ? 0 : -1}
+      onClick={(event) => {
+        if (!isActive) {
+          onAdvance();
+          return;
+        }
+        onOpen(project, event);
+      }}
+      onKeyDown={(event) => {
+        if (isActive && (event.key === "Enter" || event.key === " ")) {
+          event.preventDefault();
+          onOpen(project, event);
+        }
+      }}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 flex-1 items-center gap-3">
-          <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-300">
-            <Icon aria-hidden="true" size={20} />
-          </span>
-          <div className="min-w-0">
-            <div className="work-meta">{formatCategory(project.category)}</div>
-            <h3 className="work-title mt-1 break-words">{project.title}</h3>
-          </div>
-        </div>
-        <span className={`status-pill status-${statusClass} shrink-0`}>
-          {project.status}
+      <div className="project-card-media-wrap">
+        <ProjectMedia media={project.media} title={project.title} priority={isActive} />
+        <div className="project-media-overlay" aria-hidden="true" />
+        <span className="project-card-index" aria-hidden="true">
+          {String(stackIndex + 1).padStart(2, "0")}
         </span>
       </div>
-
-      <p className="work-copy mt-4 flex-1">{project.summary}</p>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
-          <span className="tag-pill" key={`${project.id}-${tag}`}>
-            {tag}
+      <div className="project-card-content">
+        <div className="project-card-heading">
+          <div className="work-meta">{formatCategory(project.category)}</div>
+          <Code aria-hidden="true" size={18} className="text-cyan-300" />
+        </div>
+        <h3 className="project-card-title">{project.title}</h3>
+        <p className="project-card-subtitle">{subtitle}</p>
+        {project.category === "development" && project.status && (
+          <span className={`status-pill status-${statusClass} project-card-status`}>
+            {project.status}
           </span>
-        ))}
-      </div>
-      <div className="work-actions">
-        <button type="button" className="ghost-button" onClick={(event) => onOpen(project, event.currentTarget)}>
-          View details
-          <ArrowUpRight aria-hidden="true" size={16} />
-        </button>
-        {primaryLink && (
-          <a
-            className="primary-button"
-            href={primaryLink.href}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {primaryLink.label}
-            <ArrowUpRight aria-hidden="true" size={16} />
-          </a>
         )}
+        <p className="project-card-description">{project.summary}</p>
+        <div className="project-card-tags">
+          {project.tags.map((tag) => (
+            <span className="tag-pill" key={`${project.id}-${tag}`}>
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="work-actions project-card-actions">
+          {primaryLink && (
+            <a
+              className="primary-button"
+              href={primaryLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabIndex={isActive ? 0 : -1}
+              onClick={(event) => event.stopPropagation()}
+            >
+              {primaryLink.label}
+              <ArrowUpRight aria-hidden="true" size={16} />
+            </a>
+          )}
+        </div>
       </div>
     </article>
   );

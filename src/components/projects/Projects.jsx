@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { AlertCircle, SearchX } from "lucide-react";
-import ProjectCard from "./ProjectCard.jsx";
+import ProjectDeck from "./ProjectDeck.jsx";
 import ProjectFilters from "./ProjectFilters.jsx";
 import ProjectModal from "./ProjectModal.jsx";
 import ProjectSearch from "./ProjectSearch.jsx";
@@ -70,11 +70,7 @@ export default function Projects({ projects, loadState, errorMessage, onRetry })
             of {projects.length} projects
           </p>
           {filteredProjects.length ? (
-            <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {filteredProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} onOpen={openProject} />
-              ))}
-            </div>
+            <ProjectDeck projects={filteredProjects} onOpen={openProject} />
           ) : (
             <div className="empty-state glass-panel">
               <SearchX aria-hidden="true" size={24} className="text-cyan-300" />
