@@ -1,67 +1,82 @@
-import { ArrowRight, Download, Mail, Sparkles } from "lucide-react";
+import { ArrowDown, Download, Mail } from "lucide-react";
 import { profile } from "../../data/profile.js";
-import { useTypingEffect } from "../../hooks/useTypingEffect.js";
 import { useScrollReveal } from "../../hooks/useScrollReveal.js";
-import StatsGrid from "./StatsGrid.jsx";
 import ProfileCard from "./ProfileCard.jsx";
+import StatsGrid from "./StatsGrid.jsx";
 
 export default function Hero({ projectCount, skillCount }) {
-  const typedRole = useTypingEffect(profile.roleMessages);
   const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section id="home" className="relative scroll-mt-24 overflow-hidden py-8 lg:py-16">
-      <div className="hero-orb one" aria-hidden="true" />
-      <div className="hero-orb two" aria-hidden="true" />
-      <div className="grid items-center gap-12 lg:grid-cols-[1.25fr_0.75fr] xl:gap-16 2xl:gap-20">
+    <section id="home" className="relative scroll-mt-24 py-10 sm:py-16 lg:py-20">
+      <div className="grid items-start gap-10 lg:grid-cols-[1.28fr_0.72fr] xl:grid-cols-[1.35fr_0.65fr] lg:gap-14 xl:gap-16">
         <div ref={ref} className={`reveal ${isVisible ? "is-visible" : ""}`}>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
-            <span className="h-2 w-2 rounded-full bg-cyan-300" aria-hidden="true" />
-            {profile.availability}
+          <div className="mb-5 inline-flex items-center gap-2.5 rounded-lg border border-white/[0.08] bg-[#11141c] px-3 py-1.5 text-xs text-[#a3a9b8]">
+            <span className="h-2 w-2 rounded-full bg-sky-400" aria-hidden="true" />
+            <span className="font-medium text-[#eef0f5]">{profile.availability}</span>
+            <span className="text-white/20" aria-hidden="true">/</span>
+            <span className="mono-font text-[#7a8296]">{profile.university}</span>
           </div>
 
-          <h1 className="brand-font text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl 2xl:text-8xl">
-            {profile.heroHeadline}
-            <span className="gradient-text block">{profile.heroHighlight}</span>
+          <h1 className="brand-font max-w-4xl text-3xl font-bold tracking-tight text-[#eef0f5] sm:text-4xl lg:text-5xl xl:text-6xl lg:leading-[1.12]">
+            {profile.headline}
           </h1>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-slate-300">
-            <span className="skill-pill">
-              <Sparkles aria-hidden="true" size={16} />
-              <span aria-live="polite" aria-atomic="true">{typedRole}</span>
-            </span>
-            <span className="skill-pill">{profile.university}</span>
-            <span className="skill-pill">Problem solving</span>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#a3a9b8] sm:text-lg">
+            {profile.subhead}
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-2" aria-label="Core focus areas">
+            {profile.focusAreas.map((area) => (
+              <span key={area} className="tag-chip">
+                {area}
+              </span>
+            ))}
           </div>
 
-          <StatsGrid
-            projectCount={projectCount}
-            focusAreaCount={profile.focusAreas.length}
-            skillCount={skillCount}
-          />
-
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <a href="#work" className="primary-button">
-              View work
-              <ArrowRight aria-hidden="true" size={16} />
+              View projects
+              <ArrowDown aria-hidden="true" size={16} />
             </a>
-            <a href={profile.cv} download="cv - yapa y.h.s.t.pdf" className="ghost-button">
-              Download CV
+            <a
+              href={profile.cv}
+              download="cv - yapa y.h.s.t.pdf"
+              className="secondary-button"
+            >
               <Download aria-hidden="true" size={16} />
+              Download CV
             </a>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-5 text-sm text-slate-400">
+          <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-[#a3a9b8]">
             {profile.socialLinks.map((link) => (
-              <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="action-link">
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-[#eef0f5]"
+              >
                 <SocialIcon name={link.label} />
-                {link.label}
+                <span>{link.label}</span>
               </a>
             ))}
-            <a href={`mailto:${profile.email}`} className="action-link">
-              <Mail aria-hidden="true" size={16} />
-              Email
+            <a
+              href={`mailto:${profile.email}`}
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-[#eef0f5]"
+            >
+              <Mail aria-hidden="true" size={15} />
+              <span>Email</span>
             </a>
+          </div>
+
+          <div className="mt-10 max-w-3xl border-t border-white/[0.06] pt-6">
+            <StatsGrid
+              projectCount={projectCount}
+              focusAreaCount={profile.focusAreas.length}
+              skillCount={skillCount}
+            />
           </div>
         </div>
 

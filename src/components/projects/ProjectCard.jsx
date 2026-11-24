@@ -1,93 +1,74 @@
-import { ArrowUpRight, Code } from "lucide-react";
+import { ArrowUpRight, FileText } from "lucide-react";
 import { formatCategory } from "./projectUtils.js";
 import ProjectMedia from "./ProjectMedia.jsx";
 
-export default function ProjectCard({
-  project,
-  stackIndex,
-  direction,
-  dragOffset,
-  isActive,
-  isAnimating,
-  onOpen,
-  onAdvance,
-}) {
-  const primaryLink = project.links[0];
-  const subtitle =
-    project.subtitle ??
-    project.summary.split(/[.!?]/)[0].trim();
-  const statusClass = project.status.toLowerCase().replaceAll(" ", "-");
-  const cardStyle = {
-    "--stack-index": stackIndex,
-    "--drag-offset": `${dragOffset}px`,
-    "--drag-rotation": `${dragOffset * 0.035}deg`,
-    "--drag-opacity": Math.max(0.65, 1 - Math.abs(dragOffset) / 800),
-    "--direction": direction,
-  };
+export default function ProjectCard({ project, onOpen }) {
+  const primaryLink = project.links?.[0];
+  const statusClass = (project.status || "ongoing").toLowerCase().replaceAll(" ", "-");
 
   return (
-    <article
-      className={`project-deck-card ${isActive ? "is-active" : "is-background"} ${isAnimating && isActive ? "is-exiting" : ""}`}
-      style={cardStyle}
-      aria-hidden={!isActive}
-      aria-label={isActive ? `Open details for ${project.title}` : undefined}
-      tabIndex={isActive ? 0 : -1}
-      onClick={(event) => {
-        if (!isActive) {
-          onAdvance();
-          return;
-        }
-        onOpen(project, event);
-      }}
-      onKeyDown={(event) => {
-        if (isActive && (event.key === "Enter" || event.key === " ")) {
-          event.preventDefault();
-          onOpen(project, event);
-        }
-      }}
-    >
-      <div className="project-card-media-wrap">
-        <ProjectMedia media={project.media} title={project.title} priority={isActive} />
-        <div className="project-media-overlay" aria-hidden="true" />
-        <span className="project-card-index" aria-hidden="true">
-          {String(stackIndex + 1).padStart(2, "0")}
-        </span>
-      </div>
-      <div className="project-card-content">
-        <div className="project-card-heading">
-          <div className="work-meta">{formatCategory(project.category)}</div>
-          <Code aria-hidden="true" size={18} className="text-cyan-300" />
+    <article className="project-card flex flex-col justify-between">
+      <div>
+        <div className="project-media-box">
+          <ProjectMedia media={project.media} title={project.title} />
         </div>
-        <h3 className="project-card-title">{project.title}</h3>
-        <p className="project-card-subtitle">{subtitle}</p>
-        {project.category === "development" && project.status && (
-          <span className={`status-pill status-${statusClass} project-card-status`}>
-            {project.status}
-          </span>
-        )}
-        <p className="project-card-description">{project.summary}</p>
-        <div className="project-card-tags">
-          {project.tags.map((tag) => (
-            <span className="tag-pill" key={`${project.id}-${tag}`}>
-              {tag}
+
+        <div className="p-5 sm:p-6">
+          <div className="flex items-center justify-between gap-2">
+            <span className="tag-chip text-xs">
+              {formatCategory(project.category)}
             </span>
-          ))}
+            {project.status && (
+              <span className={`status-badge ${statusClass}`}>
+                {project.status}
+              </span>
+            )}
+          </div>
+
+          <h3 className="brand-font mt-3 text-lg font-bold text-[#eef0f5] sm:text-xl">
+            {project.title}
+          </h3>
+
+          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-[#a3a9b8]">
+            {project.summary}
+          </p>
+
+          <div className="mt-4 flex flex-wrap gap-1.5" aria-label="Project technologies">
+            {project.tags.slice(0, 4).map((tag) => (
+              <span key={`${project.id}-${tag}`} className="tag-chip text-[11px]">
+                {tag}
+              </span>
+            ))}
+            {project.tags.length > 4 && (
+              <span className="mono-font text-[11px] text-[#7a8296] self-center pl-1">
+                +{project.tags.length - 4} more
+              </span>
+            )}
+          </div>
         </div>
-        <div className="work-actions project-card-actions">
-          {primaryLink && (
-            <a
-              className="primary-button"
-              href={primaryLink.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              tabIndex={isActive ? 0 : -1}
-              onClick={(event) => event.stopPropagation()}
-            >
-              {primaryLink.label}
-              <ArrowUpRight aria-hidden="true" size={16} />
-            </a>
-          )}
-        </div>
+      </div>
+
+      <div className="flex items-center justify-between gap-3 border-t border-white/[0.06] bg-[#11141c]/50 px-5 py-3 sm:px-6">
+        <button
+          type="button"
+          onClick={() => onOpen(project)}
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#a3a9b8] transition-colors hover:text-[#eef0f5]"
+        >
+          <FileText size={14} aria-hidden="true" />
+          <span>Read details</span>
+        </button>
+
+        {primaryLink && (
+          <a
+            href={primaryLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-400 transition-colors hover:text-sky-300"
+          >
+            <span>{primaryLink.label}</span>
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
+        )}
       </div>
     </article>
   );

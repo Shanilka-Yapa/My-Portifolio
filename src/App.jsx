@@ -5,8 +5,6 @@ import Hero from "./components/hero/Hero.jsx";
 import Projects from "./components/projects/Projects.jsx";
 import Skills from "./components/skills/Skills.jsx";
 import Contact from "./components/contact/Contact.jsx";
-import SparkleBackground from "./components/effects/SparkleBackground.jsx";
-import MouseTrail from "./components/effects/MouseTrail.jsx";
 import { skills } from "./data/skills.js";
 import { useActiveSection } from "./hooks/useActiveSection.js";
 
@@ -82,10 +80,8 @@ export default function App() {
 
   return (
     <>
-      <SparkleBackground />
-      <MouseTrail />
       <Navbar activeSection={activeSection} />
-      <main className="relative z-10 mx-auto max-w-[1520px] px-5 pt-28 sm:px-8 lg:px-12">
+      <main className="relative z-10 w-full px-4 pt-20 pb-16 sm:px-6 lg:px-8 xl:px-10">
         <Hero projectCount={loadState === "success" ? projects.length : 0} skillCount={skills.length} />
         <Projects
           projects={projects}

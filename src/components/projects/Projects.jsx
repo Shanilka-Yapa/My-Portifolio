@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { AlertCircle, SearchX } from "lucide-react";
-import ProjectDeck from "./ProjectDeck.jsx";
+import ProjectCard from "./ProjectCard.jsx";
 import ProjectFilters from "./ProjectFilters.jsx";
 import ProjectModal from "./ProjectModal.jsx";
 import ProjectSearch from "./ProjectSearch.jsx";
@@ -18,6 +18,7 @@ export default function Projects({ projects, loadState, errorMessage, onRetry })
     () => [...new Set(projects.map((project) => project.category))],
     [projects],
   );
+
   const filteredProjects = useMemo(() => {
     const query = searchValue.trim().toLocaleLowerCase();
     return projects.filter((project) => {
@@ -38,55 +39,84 @@ export default function Projects({ projects, loadState, errorMessage, onRetry })
     });
   }, [projects, activeCategory, searchValue]);
 
-  const openProject = (project, trigger) => {
-    triggerRef.current = trigger;
+  const openProject = (project) => {
     setSelectedProject(project);
   };
-  const closeProject = useCallback(() => setSelectedProject(null), []);
+
+  const closeProject = useCallback(() => {
+    setSelectedProject(null);
+  }, []);
 
   return (
-    <section id="work" className="scroll-mt-24 py-18 sm:py-24">
-      <div ref={ref} className={`reveal mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between ${isVisible ? "is-visible" : ""}`}>
-        <div>
-          <div className="work-meta">01. Selected work</div>
-          <h2 className="brand-font mt-3 text-3xl font-bold text-white sm:text-4xl">
-            A dynamic gallery of projects and design work
-          </h2>
+    <section id="work" className="scroll-mt-24 py-12 sm:py-16 lg:py-20">
+      <div ref={ref} className={`reveal mb-8 ${isVisible ? "is-visible" : ""}`}>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+          <div>
+            <span className="mono-font text-xs font-semibold tracking-wider text-sky-400">
+              01 / SELECTED WORK
+            </span>
+            <h2 className="brand-font mt-2 max-w-4xl text-2xl font-bold tracking-tight text-[#eef0f5] sm:text-3xl lg:text-4xl">
+              Software, Systems & Engineering Projects
+            </h2>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#a3a9b8] sm:text-base">
+              A comprehensive showcase across C++ socket programming, mobile augmented reality, full-stack web applications, and automated cloud deployments.
+            </p>
+          </div>
         </div>
+
         {loadState === "success" && (
-          <ProjectSearch value={searchValue} onChange={setSearchValue} />
+          <div className="mt-8 flex flex-col gap-4 border-b border-white/[0.06] pb-5 sm:flex-row sm:items-center sm:justify-between">
+            <ProjectFilters
+              categories={categories}
+              activeCategory={activeCategory}
+              onChange={setActiveCategory}
+            />
+            <div className="flex items-center gap-3">
+              <ProjectSearch value={searchValue} onChange={setSearchValue} />
+            </div>
+          </div>
+        )}
+
+        {loadState === "success" && (
+          <div className="mt-4 flex items-center justify-between text-xs text-[#7a8296]">
+            <span>
+              Showing <strong className="font-semibold text-[#eef0f5]">{filteredProjects.length}</strong> of {projects.length} projects
+            </span>
+            {activeCategory !== "all" && (
+              <span className="mono-font text-sky-400">Filtered: {formatCategory(activeCategory)}</span>
+            )}
+          </div>
         )}
       </div>
 
       {loadState === "success" && (
         <>
-          <ProjectFilters
-            categories={categories}
-            activeCategory={activeCategory}
-            onChange={setActiveCategory}
-          />
-          <p className="mb-5 text-sm text-slate-400" aria-live="polite">
-            Showing <span className="font-semibold text-slate-200">{filteredProjects.length}</span>{" "}
-            of {projects.length} projects
-          </p>
           {filteredProjects.length ? (
-            <ProjectDeck projects={filteredProjects} onOpen={openProject} />
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:gap-8">
+              {filteredProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onOpen={openProject}
+                />
+              ))}
+            </div>
           ) : (
-            <div className="empty-state glass-panel">
-              <SearchX aria-hidden="true" size={24} className="text-cyan-300" />
-              <h3 className="mt-3 font-semibold text-white">No projects match your search</h3>
-              <p className="mt-1 text-sm text-slate-400">
-                Try a different keyword or clear the selected filters.
+            <div className="card-panel flex min-h-[14rem] flex-col items-center justify-center p-8 text-center">
+              <SearchX aria-hidden="true" size={28} className="text-[#7a8296]" />
+              <h3 className="mt-3 text-base font-semibold text-[#eef0f5]">No projects matched your criteria</h3>
+              <p className="mt-1 text-xs text-[#a3a9b8]">
+                Try searching for another technology or reset the active filters.
               </p>
               <button
                 type="button"
-                className="ghost-button mt-4"
+                className="secondary-button mt-4"
                 onClick={() => {
                   setSearchValue("");
                   setActiveCategory("all");
                 }}
               >
-                Clear filters
+                Reset filters
               </button>
             </div>
           )}
@@ -94,23 +124,19 @@ export default function Projects({ projects, loadState, errorMessage, onRetry })
       )}
 
       {loadState === "loading" && (
-        <div className="glass-panel rounded-2xl p-8 text-center text-slate-300" role="status">
-          Loading projects…
+        <div className="card-panel p-10 text-center text-sm text-[#a3a9b8]" role="status">
+          Loading project catalog…
         </div>
       )}
+
       {loadState === "error" && (
-        <div className="error-state glass-panel" role="alert">
-          <AlertCircle aria-hidden="true" size={24} className="text-rose-300" />
-          <h3 className="mt-3 font-semibold text-white">Projects could not be loaded</h3>
-          <p className="mt-1 max-w-2xl text-sm text-slate-400">{errorMessage}</p>
-          <button type="button" className="ghost-button mt-4" onClick={onRetry}>
-            Try again
+        <div className="card-panel border-rose-500/30 p-8 text-center" role="alert">
+          <AlertCircle aria-hidden="true" size={24} className="mx-auto text-rose-400" />
+          <h3 className="mt-2 text-base font-semibold text-[#eef0f5]">Failed to load projects</h3>
+          <p className="mt-1 text-xs text-[#a3a9b8]">{errorMessage}</p>
+          <button type="button" className="secondary-button mt-4" onClick={onRetry}>
+            Retry loading
           </button>
-        </div>
-      )}
-      {loadState === "success" && projects.length === 0 && (
-        <div className="empty-state glass-panel" role="status">
-          <p className="text-slate-300">No projects are currently listed in projects.json.</p>
         </div>
       )}
 

@@ -6,42 +6,36 @@ export default function ProfileCard() {
 
   return (
     <div ref={ref} className={`w-full lg:justify-self-end ${isVisible ? "is-visible" : ""} reveal`}>
-      <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-        <div className="absolute -inset-5 rounded-[2rem] bg-gradient-to-br from-cyan-400/20 via-violet-500/10 to-fuchsia-400/20 blur-2xl" />
-        <div className="relative overflow-hidden rounded-[2rem] border border-slate-700/80 bg-slate-950/75 p-6 shadow-2xl shadow-cyan-950/30 sm:p-7">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <div className="work-meta">Profile</div>
-              <h2 className="brand-font mt-2 text-2xl font-bold text-white sm:text-3xl">
-                {profile.name}
-              </h2>
-              <p className="mt-2 max-w-sm text-sm leading-7 text-slate-400">
-                {profile.bio}
-              </p>
-            </div>
-            <span className="status-pill status-build shrink-0">Build mode</span>
+      <div className="card-panel relative mx-auto w-full max-w-md lg:max-w-md xl:max-w-lg p-4 sm:p-5">
+        <div className="mb-4 flex items-center justify-between border-b border-white/[0.06] pb-3">
+          <div>
+            <span className="mono-font text-xs text-[#7a8296]">ENGINEERING PROFILE</span>
+            <h2 className="brand-font text-lg font-bold text-[#eef0f5]">{profile.name}</h2>
           </div>
+          <span className="tag-chip mono-font text-[11px] text-sky-400">
+            {profile.university}
+          </span>
+        </div>
 
-          <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-slate-700 bg-slate-900/70">
-            <img
-              src={profile.image}
-              alt={`Portrait of ${profile.name}`}
-              className="h-[24rem] w-full object-cover object-top"
-              width="800"
-              height="960"
-              fetchPriority="high"
-            />
+        <div className="overflow-hidden rounded-xl border border-white/[0.08] bg-[#07080d]">
+          <img
+            src={profile.image}
+            alt={`Portrait of ${profile.name}`}
+            className="h-[21rem] w-full object-cover object-top sm:h-[23rem] xl:h-[25rem]"
+            width="800"
+            height="960"
+            fetchPriority="high"
+          />
+        </div>
+
+        <div className="mt-4 space-y-2.5">
+          <div className="rounded-lg border border-white/[0.06] bg-[#1a1e28]/50 p-3">
+            <div className="mono-font text-[11px] text-[#7a8296]">PRIMARY FOCUS</div>
+            <p className="mt-0.5 text-xs text-[#eef0f5]">{profile.bestFit}</p>
           </div>
-
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            <div className="stat-card">
-              <div className="work-meta">Current direction</div>
-              <p className="mt-2 text-sm text-slate-300">{profile.currentDirection}</p>
-            </div>
-            <div className="stat-card">
-              <div className="work-meta">Best fit</div>
-              <p className="mt-2 text-sm text-slate-300">{profile.bestFit}</p>
-            </div>
+          <div className="flex items-center justify-between px-1 pt-1 text-[11px] text-[#7a8296]">
+            <span className="mono-font">STATUS: AVAILABLE</span>
+            <span className="mono-font text-sky-400">RUHUNA // DEPT:CE</span>
           </div>
         </div>
       </div>
