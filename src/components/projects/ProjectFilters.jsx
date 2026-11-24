@@ -2,21 +2,23 @@ import { formatCategory } from "./projectUtils.js";
 
 export default function ProjectFilters({ categories, activeCategory, onChange }) {
   return (
-    <div className="reveal mb-6 flex flex-wrap gap-3 is-visible" aria-label="Filter projects by category">
+    <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter projects by category">
       <button
         type="button"
-        className={`filter-pill ${activeCategory === "all" ? "active" : ""}`}
-        aria-pressed={activeCategory === "all"}
+        role="tab"
+        aria-selected={activeCategory === "all"}
+        className={`filter-chip ${activeCategory === "all" ? "active" : ""}`}
         onClick={() => onChange("all")}
       >
-        All
+        All projects
       </button>
       {categories.map((category) => (
         <button
           key={category}
           type="button"
-          className={`filter-pill ${activeCategory === category ? "active" : ""}`}
-          aria-pressed={activeCategory === category}
+          role="tab"
+          aria-selected={activeCategory === category}
+          className={`filter-chip ${activeCategory === category ? "active" : ""}`}
           onClick={() => onChange(category)}
         >
           {formatCategory(category)}

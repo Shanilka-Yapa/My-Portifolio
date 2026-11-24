@@ -18,7 +18,12 @@
         "label": "View repository",
         "href": "https://github.com/Shanilka-Yapa/AR-campus-navigation-system---ARWayz.git"
       }
-    ]
+    ],
+    "media": {
+      "type": "image",
+      "src": "/projects/arways.jpg",
+      "alt": "AR Waays - Campus Navigation System project preview"
+    }
   },
   {
     "id": "traffic-fine-system",
@@ -27,7 +32,7 @@
     "status": "Completed",
     "icon": "shield-alert",
     "summary": "A comprehensive digital platform designed to modernize traffic fine management with user & admin dashboards, secure authentication, fine tracking, and online payment integrations.",
-    "details": "A comprehensive digital platform designed to modernize traffic fine management. The system allows traffic violations and fines to be managed digitally, while providing separate interfaces for users and administrators. It also supports secure authentication, fine tracking, online payments, and notifications.\n\nKey Features:\n• Digital traffic fine and violation management\n• Separate user and administrative dashboards\n• Secure authentication and user management\n• Fine tracking and management\n• Online payment integration with PayHere and Stripe\n• Notification functionality\n• Responsive web and mobile interfaces",
+    "details": "A comprehensive digital platform designed to modernize traffic fine management. The system allows traffic violations and fines to be managed digitally, while providing separate interfaces for users and administrators. It also supports secure authentication, fine tracking, online payments, and notifications.\n\nKey Features:\nâ€¢ Digital traffic fine and violation management\nâ€¢ Separate user and administrative dashboards\nâ€¢ Secure authentication and user management\nâ€¢ Fine tracking and management\nâ€¢ Online payment integration with PayHere and Stripe\nâ€¢ Notification functionality\nâ€¢ Responsive web and mobile interfaces",
     "tags": [
       "Flutter",
       "React",
@@ -48,7 +53,12 @@
         "label": "View repository",
         "href": "https://github.com/Mesit-Rathnayake/Traffic-Fine-System.git"
       }
-    ]
+    ],
+    "media": {
+      "type": "image",
+      "src": "/projects/traffic.jpg",
+      "alt": "Traffic Fine Management System project preview"
+    }
   },
   {
     "id": "acadex",
@@ -57,7 +67,7 @@
     "status": "Ongoing",
     "icon": "graduation-cap",
     "summary": "A personal academic management and productivity application designed to help university students organize and track their academic activities in one place.",
-    "details": "A personal academic management application designed to help university students organize and track their academic activities in one place. Acadex provides tools for calculating GPA, monitoring attendance, managing exams and assignments, and organizing weekly timetables.\n\nKey Features:\n• GPA calculator with semester and module management\n• Attendance tracking and percentage calculation\n• Exam management and organization\n• Assignment tracking with deadline management\n• Weekly timetable management\n• Module-based academic organization\n• Local data storage for saving user information\n• Clean and responsive user interface",
+    "details": "A personal academic management application designed to help university students organize and track their academic activities in one place. Acadex provides tools for calculating GPA, monitoring attendance, managing exams and assignments, and organizing weekly timetables.\n\nKey Features:\nâ€¢ GPA calculator with semester and module management\nâ€¢ Attendance tracking and percentage calculation\nâ€¢ Exam management and organization\nâ€¢ Assignment tracking with deadline management\nâ€¢ Weekly timetable management\nâ€¢ Module-based academic organization\nâ€¢ Local data storage for saving user information\nâ€¢ Clean and responsive user interface",
     "tags": [
       "Flutter",
       "Dart",
@@ -74,7 +84,12 @@
         "label": "View repository",
         "href": "https://github.com/Shanilka-Yapa/Acadex.git"
       }
-    ]
+    ],
+    "media": {
+      "type": "image",
+      "src": "/projects/acadex.jpg",
+      "alt": "Acadex - Academic Management App project preview"
+    }
   },
   {
     "id": "fitease",
@@ -95,7 +110,12 @@
         "label": "Open preview",
         "href": "https://www.linkedin.com/posts/shanilka-t-yapa-12115426b_uxdesign-uidesign-fitnessapp-activity-7307611971414110208-89_p?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEINLKkBkCjkgV7kh0aDCuP6wpVdHQvoTQk"
       }
-    ]
+    ],
+    "media": {
+      "type": "image",
+      "src": "/projects/fitease.jpg",
+      "alt": "Fitease - Fitness App UI project preview"
+    }
   },
   {
     "id": "cribcare",
@@ -104,7 +124,7 @@
     "status": "Design",
     "icon": "baby",
     "summary": "A smart-care concept that alerts parents when a child enters a danger zone on the connected mat.",
-    "details": "Cribcare was designed to alert parents when their child enters a danger zone on the smart mat. The mat is connected to the app, allowing parents to monitor the child’s location in real time.",
+    "details": "Cribcare was designed to alert parents when their child enters a danger zone on the smart mat. The mat is connected to the app, allowing parents to monitor the childâ€™s location in real time.",
     "tags": [
       "Figma",
       "Health Tech",
@@ -116,7 +136,12 @@
         "label": "Open preview",
         "href": "https://www.linkedin.com/posts/shanilka-t-yapa-12115426b_eminence5-teamquadra-uiux-activity-7419255510853660673-1EqX?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEINLKkBkCjkgV7kh0aDCuP6wpVdHQvoTQk"
       }
-    ]
+    ],
+    "media": {
+      "type": "image",
+      "src": "/projects/cribcare.jpg",
+      "alt": "Cribcare - Innovation for Newborn Care project preview"
+    }
   },
   {
     "id": "qaleesi-design",
@@ -137,7 +162,12 @@
         "label": "Open preview",
         "href": "https://drive.google.com/file/d/15Eqgu8tyUFQUhZGqqgWgP2Skvq7p1-fX/preview"
       }
-    ]
+    ],
+    "media": {
+      "type": "image",
+      "src": "/projects/qaleesi-design.jpg",
+      "alt": "Qaleesi - Volunteer Management App project preview"
+    }
   },
   {
     "id": "libricore",
@@ -163,7 +193,12 @@
         "label": "View live demo",
         "href": "https://www.linkedin.com/posts/shanilka-t-yapa-12115426b_devops-fullstack-react-activity-7429024562266402816-snx_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEINLKkBkCjkgV7kh0aDCuP6wpVdHQvoTQk"
       }
-    ]
+    ],
+    "media": {
+      "type": "image",
+      "src": "/projects/libricore.jpg",
+      "alt": "LibriCore - Cloud-Based Library Management System project preview"
+    }
   },
   {
     "id": "qaleesi",
@@ -184,7 +219,12 @@
         "label": "View repository",
         "href": "https://github.com/Shanilka-Yapa/Qaleesi_5435.git"
       }
-    ]
+    ],
+    "media": {
+      "type": "image",
+      "src": "/projects/qaleesi.jpg",
+      "alt": "Qaleesi - Volunteering Platform project preview"
+    }
   },
   {
     "id": "lan-file-drop",
@@ -205,7 +245,12 @@
         "label": "View repository",
         "href": "https://github.com/Mesit-Rathnayake/LAN_File_Drop.git"
       }
-    ]
+    ],
+    "media": {
+      "type": "image",
+      "src": "/projects/lan-file-drop.jpg",
+      "alt": "LAN File Drop - Local Network File Sharing System project preview"
+    }
   },
   {
     "id": "book-recommendation",
@@ -227,6 +272,11 @@
         "label": "View repository",
         "href": "https://github.com/Shanilka-Yapa/ML-Classification-Project"
       }
-    ]
+    ],
+    "media": {
+      "type": "image",
+      "src": "/projects/book-recommendation.jpg",
+      "alt": "Book Recommendation System - Machine Learning Project project preview"
+    }
   }
 ]

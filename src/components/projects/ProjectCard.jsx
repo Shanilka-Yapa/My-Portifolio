@@ -1,82 +1,72 @@
-import {
-  ArrowUpRight,
-  Baby,
-  BrainCircuit,
-  Code,
-  FolderClosed,
-  GraduationCap,
-  LayoutTemplate,
-  MapPin,
-  MonitorSmartphone,
-  Server,
-  ShieldAlert,
-  Users,
-} from "lucide-react";
-import { useScrollReveal } from "../../hooks/useScrollReveal.js";
-import { formatCategory, getProjectIcon } from "./projectUtils.js";
-
-const icons = {
-  MapPin,
-  ShieldAlert,
-  GraduationCap,
-  MonitorSmartphone,
-  Baby,
-  LayoutTemplate,
-  Server,
-  Users,
-  FolderClosed,
-  BrainCircuit,
-  Code,
-};
+import { ArrowUpRight, FileText } from "lucide-react";
+import { formatCategory } from "./projectUtils.js";
+import ProjectMedia from "./ProjectMedia.jsx";
 
 export default function ProjectCard({ project, onOpen }) {
-  const { ref, isVisible } = useScrollReveal();
-  const Icon = icons[getProjectIcon(project.icon)] ?? Code;
-  const primaryLink = project.links[0];
-  const statusClass = project.status.toLowerCase().replaceAll(" ", "-");
+  const primaryLink = project.links?.[0];
+  const statusClass = (project.status || "ongoing").toLowerCase().replaceAll(" ", "-");
 
   return (
-    <article
-      ref={ref}
-      className={`work-card reveal flex h-full flex-col ${isVisible ? "is-visible" : ""}`}
-    >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 flex-1 items-center gap-3">
-          <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-300">
-            <Icon aria-hidden="true" size={20} />
-          </span>
-          <div className="min-w-0">
-            <div className="work-meta">{formatCategory(project.category)}</div>
-            <h3 className="work-title mt-1 break-words">{project.title}</h3>
+    <article className="project-card flex flex-col justify-between">
+      <div>
+        <div className="project-media-box">
+          <ProjectMedia media={project.media} title={project.title} />
+        </div>
+
+        <div className="p-5 sm:p-6">
+          <div className="flex items-center justify-between gap-2">
+            <span className="tag-chip text-xs">
+              {formatCategory(project.category)}
+            </span>
+            {project.status && (
+              <span className={`status-badge ${statusClass}`}>
+                {project.status}
+              </span>
+            )}
+          </div>
+
+          <h3 className="brand-font mt-3 text-lg font-bold text-[#eef0f5] sm:text-xl">
+            {project.title}
+          </h3>
+
+          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-[#a3a9b8]">
+            {project.summary}
+          </p>
+
+          <div className="mt-4 flex flex-wrap gap-1.5" aria-label="Project technologies">
+            {project.tags.slice(0, 4).map((tag) => (
+              <span key={`${project.id}-${tag}`} className="tag-chip text-[11px]">
+                {tag}
+              </span>
+            ))}
+            {project.tags.length > 4 && (
+              <span className="mono-font text-[11px] text-[#7a8296] self-center pl-1">
+                +{project.tags.length - 4} more
+              </span>
+            )}
           </div>
         </div>
-        <span className={`status-pill status-${statusClass} shrink-0`}>
-          {project.status}
-        </span>
       </div>
 
-      <p className="work-copy mt-4 flex-1">{project.summary}</p>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
-          <span className="tag-pill" key={`${project.id}-${tag}`}>
-            {tag}
-          </span>
-        ))}
-      </div>
-      <div className="work-actions">
-        <button type="button" className="ghost-button" onClick={(event) => onOpen(project, event.currentTarget)}>
-          View details
-          <ArrowUpRight aria-hidden="true" size={16} />
+      <div className="flex items-center justify-between gap-3 border-t border-white/[0.06] bg-[#11141c]/50 px-5 py-3 sm:px-6">
+        <button
+          type="button"
+          onClick={() => onOpen(project)}
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#a3a9b8] transition-colors hover:text-[#eef0f5]"
+        >
+          <FileText size={14} aria-hidden="true" />
+          <span>Read details</span>
         </button>
+
         {primaryLink && (
           <a
-            className="primary-button"
             href={primaryLink.href}
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-400 transition-colors hover:text-sky-300"
           >
-            {primaryLink.label}
-            <ArrowUpRight aria-hidden="true" size={16} />
+            <span>{primaryLink.label}</span>
+            <ArrowUpRight size={14} aria-hidden="true" />
           </a>
         )}
       </div>

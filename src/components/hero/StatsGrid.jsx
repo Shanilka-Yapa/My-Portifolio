@@ -1,43 +1,42 @@
-import { useScrollReveal } from "../../hooks/useScrollReveal.js";
 import AnimatedCounter from "./AnimatedCounter.jsx";
 
 export default function StatsGrid({ projectCount, focusAreaCount, skillCount }) {
   const stats = [
     {
-      label: "Projects",
+      label: "Selected projects",
       value: projectCount,
-      description: "Selected work across development, design, ML, and infrastructure.",
+      note: "Systems, web, mobile, ML",
     },
     {
-      label: "Focus areas",
+      label: "Engineering domains",
       value: focusAreaCount,
-      description: "Systems, frontend, UX, and cloud delivery.",
+      note: "From hardware to cloud",
     },
     {
-      label: "Skill groups",
+      label: "Technologies",
       value: skillCount,
-      description: "Languages, tools, frameworks, and data workflows.",
+      note: "Across 6 categories",
     },
   ];
 
   return (
-    <div className="mt-8 grid gap-4 sm:grid-cols-3">
+    <div className="grid grid-cols-3 gap-3 sm:gap-4">
       {stats.map((stat) => (
-        <StatCard key={stat.label} stat={stat} />
+        <div
+          key={stat.label}
+          className="rounded-lg border border-white/[0.06] bg-[#11141c]/60 p-3 sm:p-4"
+        >
+          <div className="brand-font text-2xl font-bold tabular-nums text-[#eef0f5] sm:text-3xl">
+            <AnimatedCounter value={stat.value} />
+          </div>
+          <div className="mt-1 text-xs font-medium text-[#eef0f5] sm:text-sm">
+            {stat.label}
+          </div>
+          <div className="mt-0.5 hidden text-xs text-[#7a8296] sm:block">
+            {stat.note}
+          </div>
+        </div>
       ))}
     </div>
-  );
-}
-
-function StatCard({ stat }) {
-  const { ref, isVisible } = useScrollReveal();
-  return (
-    <article ref={ref} className={`stat-card reveal ${isVisible ? "is-visible" : ""}`}>
-      <div className="work-meta">{stat.label}</div>
-      <div className="mt-2 text-3xl font-bold text-white">
-        <AnimatedCounter value={stat.value} />
-      </div>
-      <p className="mt-2 text-sm text-slate-400">{stat.description}</p>
-    </article>
   );
 }
